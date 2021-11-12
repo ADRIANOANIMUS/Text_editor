@@ -1,32 +1,31 @@
 import React, { Component } from 'react'
 import { Editor } from "react-draft-wysiwyg"
-import { EditorState } from 'draft-js'
+import { EditorState, convertToRaw } from 'draft-js'
+
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
+import draftTohtml from "draftjs-to-html"
 
 export default class TextEditor extends Component {
 
     state = {
-        editorState:EditorState.createEmpty(),
+        editorState: EditorState.createEmpty(),
     }
-
     onEditorStateChange = (editorState) => {
         this.setState({
-            editorState, 
+            editorState,
         })
     }
-
-
     render() {
-        const {editorState} = this.state
+        const { editorState } = this.state
         return (
             <div>
                 <Editor
-  editorState={editorState}
-  toolbarClassName="toolbarClassName"
-  wrapperClassName="wrapperClassName"
-  editorClassName="editorClassName"
-  onEditorStateChange={this.onEditorStateChange}
-/>
+                    editorState={editorState}
+                    toolbarClassName="toolbarClassName"
+                    wrapperClassName="wrapperClassName"
+                    editorClassName="editorClassName"
+                    onEditorStateChange={this.onEditorStateChange}
+                />
             </div>
         )
     }
