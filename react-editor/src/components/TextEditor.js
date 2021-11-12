@@ -3,7 +3,7 @@ import { Editor } from "react-draft-wysiwyg"
 import { EditorState, convertToRaw } from 'draft-js'
 
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
-import draftTohtml from "draftjs-to-html"
+import draftToHtml from "draftjs-to-html"
 
 export default class TextEditor extends Component {
 
@@ -17,6 +17,7 @@ export default class TextEditor extends Component {
     }
     render() {
         const { editorState } = this.state
+        console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())))
         return (
             <div>
                 <Editor
@@ -26,7 +27,12 @@ export default class TextEditor extends Component {
                     editorClassName="editorClassName"
                     onEditorStateChange={this.onEditorStateChange}
                 />
+                <textarea
+                    disabled
+                    value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
+                ></textarea>
             </div>
+
         )
     }
 }
